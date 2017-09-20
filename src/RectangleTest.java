@@ -12,7 +12,7 @@ public void testGetArea(){
 
 @Test
 public void testGetPerimeter(){
-  assertEquals(rectTest.getPerimeter(), 22);
+  assertEquals(rectTest.getPerimeter(), 60);
 
 }
 
