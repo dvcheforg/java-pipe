@@ -94,7 +94,32 @@ pipeline{
             echo "tagging the release"
             sh "git tag rectangle-${env.MAJOR_VERSION}.${env.BUILD_NUMBER}"
        }
+
+       post {
+             success {
+               emailext(
+                 subject:"${env.JOB_NAME} [${env.BUILD_NUMBER}] success and promoted!",
+                 body: """<p> Development promoted to master</p>""",
+                 to: "dvcheforg@gmail.com"
+                 )
+             }
+
+       }
     }
+
+
+
+  }
+
+  post {
+
+        failure {
+          emailext(
+            subject:"${env.JOB_NAME} [${env.BUILD_NUMBER}] Failed!",
+            body: """<p> Build Failed </p>""",
+            to: "dvcheforg@gmail.com"
+            )
+        }
 
   }
 
