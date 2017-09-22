@@ -43,15 +43,27 @@ pipeline{
 
     stage ('running on centos') {
       agent {
-        label "CentOS"
+        label "apache"
       }
 
       steps{
-        sh "wget http://dv.centos.local/rectangles/all/rectangle_${env.BUILD_NUMBER}"
+        sh "wget http://dv.centos.local/rectangles/all/rectangle_${env.BUILD_NUMBER}.jar"
         sh "java -jar rectangle_${env.BUILD_NUMBER}.jar 10 23"
       }
     }
 
+    stage ("running on debian"){
+
+      agent {
+        docker 'openjdk:8u141-jre'
+      }
+
+      steps {
+        sh "wgt http://dv.centos.local/rectangles/all/rectangle_${env.BUILD_NUMBER}.jar"
+        sh "java -jar rectangle_${env.BUILD_NUMBER}.jar 10 23"
+      }
+
+    }
   }
 
 
