@@ -24,6 +24,11 @@ pipeline{
       steps {
         sh 'ant -f build.xml -v'
       }
+      post {
+        success{
+           archiveArtifacts artifacts: 'dist/*.jar', fingerprint: true
+        }
+      }
     }
     stage('deploy') {
 
@@ -38,7 +43,7 @@ pipeline{
 
     stage ('running on centos') {
       agent {
-        label "centos"
+        label "CentOS"
       }
 
       steps{
@@ -49,9 +54,5 @@ pipeline{
 
   }
 
-  post {
-    always{
-       archiveArtifacts artifacts: 'dist/*.jar', fingerprint: true
-    }
-  }
+
 }
