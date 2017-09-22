@@ -42,7 +42,7 @@ pipeline{
 
       steps{
         sh "if ![ -d 'var/www/html/rectangles/all/${env.BRANCH_NAME}' ]; then /var/www/html/rectangles/all/${env.BRANCH_NAME}; fi"
-        sh "cp dist/rectangle_${env.MAJOR_VERSION}.${env.BUILD_NUMBER}.jar /var/www/html/rectangles/all/${env.BRANCH_NAME}/${env.MAJOR_VERSION}.${env.BRANCH_NUMBER}"
+        sh "cp dist/rectangle_${env.MAJOR_VERSION}.${env.BUILD_NUMBER}.jar /var/www/html/rectangles/all/${env.BRANCH_NAME}/"
       }
     }
 
