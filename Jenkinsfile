@@ -52,17 +52,13 @@ pipeline{
       }
     }
 
-    stage ("running on debian"){
-
+    stage ('move to green') {
       agent {
-        docker 'openjdk:8u141-jre'
+        label 'apache'
       }
-
       steps {
-        sh "wget http://dv.centos.local/rectangles/all/rectangle_${env.BUILD_NUMBER}.jar"
-        sh "java -jar rectangle_${env.BUILD_NUMBER}.jar 10 23"
+        sh "cp /var/www/html/rectangles/all/rectangle_${env.BUILD_NUMBER}.jar /var/www/html/rectangles/green/"
       }
-
     }
   }
 
